@@ -5,6 +5,7 @@ use App\Http\Controllers\TesteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/users', [UserController::class, 'create'] );
 
 Route::group([
     'prefix' => 'auth'
@@ -14,5 +15,5 @@ Route::group([
 
 
 Route::middleware('jwt.verify')->group(function(){
-    Route::post('/users', [UserController::class, 'create'] );
+    Route::post('/users/{id}/deposit', [UserController::class, 'deposit']);
 });

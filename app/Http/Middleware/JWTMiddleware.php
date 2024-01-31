@@ -21,7 +21,7 @@ class JWTMiddleware{
         }
 
         try{
-            JWTAuth::parseToken()->authenticade();
+            JWTAuth::parseToken()->authenticate();
             return $next($request);
         } catch(JWTException $error ) {
 
