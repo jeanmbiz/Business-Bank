@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateDepositRequest extends FormRequest
+class CreateTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->user()->id == $this->route('id');
+        return true;
     }
 
     /**
@@ -22,6 +22,8 @@ class CreateDepositRequest extends FormRequest
     public function rules(): array {
         return [
             'value'=> ['required','numeric', 'gte:0.01'],
+            'payer' => 'required',
+            'receiver' => 'required',
         ];
     }
 
