@@ -3,23 +3,31 @@
 namespace App\Services;
 
 use App\Exceptions\AppError;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginService{
-    public function execute(array $data){
+    public function execute(array $credentials){
 
-        if(!$token = auth()->attempt($data)){
-            throw new AppError('Email ou senha incorretos', 401);
+        if(!Auth::attempt($credentials)){
+            throw new AppError('Incorrect email or password', 401);
         }
 
-        return $this->responseToken($token);
+        $user = Auth::user();
 
+        $token = JWTAuth::fromUser($user, [
+            'user_id' => $user->id,
+            'user_cpf' => $user->cpf,
+        ]);
+
+        return $this->respondWithToken($token, $user);
     }
 
-    private function responseToken($token){
+    private function respondWithToken($token, $user){
+
         return response()->json([
             'token' => $token,
-            'user' => auth()->user()
+            'user' => $user->only(['id', 'name', 'email'])
         ]);
     }
 }
