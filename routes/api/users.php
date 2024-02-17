@@ -8,7 +8,4 @@ Route::group([
 ], function () {
     Route::post('', [UserController::class, 'create']);
 
-    Route::middleware('jwt.verify')->group(function () {
-        Route::post('{id}/deposit', [UserController::class, 'deposit']);
-    });
 });
