@@ -22,23 +22,27 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>['required', 'email'],
-            'name'=>['required'],
-            'cpf'=>['required'],
-            'name'=>['required'],
-            'password'=>['required', 'min:7', 'regex:/[a-zA-Z]/i'],
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'cpf' => ['required'],
+            'password' => ['required', 'min:7', 'regex:/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/i'],
+            'isAdmin' => ['boolean'],
+            'balance' => ['prohibited'],
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
+            'name.required' => 'Nome é obrigatóro',
             'email.required' => 'Email é obrigatóro',
             'email.mail' => 'Email deve ser um endereço válido',
-            'name.required' => 'Nome é obrigatóro',
             'cpf.required' => 'CPF é obrigatóro',
             'password.required' => 'Senha é obrigatóra',
             'password.min' => 'Senha deve conter mínimo 7 caracteres',
-            'password.regex' => 'Senha deve ter xxx caracteres igual o regex'
+            'password.regex' => 'Senha deve ter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
+            'isAdmin' => 'O valor deve ser do tipo booleano',
+            'balance.prohibited' => 'Este campo não pode ser incluído na criação do usuário.',
         ];
     }
 }

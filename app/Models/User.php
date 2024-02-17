@@ -11,7 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject {
+class User extends Authenticatable implements JWTSubject
+{
     use HasApiTokens, HasFactory, HasUuids, Notifiable;
 
     /**
@@ -22,10 +23,10 @@ class User extends Authenticatable implements JWTSubject {
     protected $fillable = [
         'name',
         'email',
-        'password',
         'cpf',
-        'balance',
+        'password',
         'isAdmin',
+        'balance',
     ];
 
     /**
@@ -35,6 +36,7 @@ class User extends Authenticatable implements JWTSubject {
      */
     protected $hidden = [
         'password',
+        'isAdmin',
     ];
 
     /**
@@ -46,14 +48,16 @@ class User extends Authenticatable implements JWTSubject {
         'password' => 'hashed',
     ];
 
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [
-            'user_id'      => $this->id,
-            'user_cpf'     => $this->cpf,
+            'user_id' => $this->id,
+            'user_cpf' => $this->cpf,
             'user_isAdmin' => $this->isAdmin,
         ];
     }
