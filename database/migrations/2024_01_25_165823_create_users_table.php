@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('password');
-            $table->string('type');
-            $table->string('balance')->default(0);
+            $table->boolean('isAdmin')->default(false);
+            $table->decimal('balance')->default(0);
             $table->timestamps();
         });
     }

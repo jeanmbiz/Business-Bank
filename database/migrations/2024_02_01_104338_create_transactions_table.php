@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->decimal('value');
             $table->uuid('payer_id');
             $table->uuid('receiver_id');
+            $table->date('date');
+            $table->string('transaction_type');
+            $table->string('payer_name');
+            $table->decimal('value');
             $table->timestamps();
 
             $table->foreign('payer_id')->references('id')->on('users');

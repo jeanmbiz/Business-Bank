@@ -22,15 +22,16 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'=>'required',
-            'password'=>'required',
+            'email' => 'required',
+            'password' => 'required',
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'email.required' => 'Email é obrigatóro',
-            'password.required' => 'Senha é obrigatóra'
+            'password.required' => 'Senha é obrigatóra',
         ];
     }
 }

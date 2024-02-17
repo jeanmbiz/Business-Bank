@@ -5,36 +5,39 @@ namespace App\Http\Middleware;
 use App\Exceptions\AppError;
 use Closure;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class JWTMiddleware{
+class JWTMiddleware
+{
+    public function handle(Request $request, Closure $next)
+    {
 
-    public function handle(Request $request, Closure $next){
+        $authorizationHeader = $request->header('Authorization');
+        $token = str_replace('Bearer ', '', $authorizationHeader);
 
-        $token = $request->header('Authorization');
-
-        if (!$token) {
-            throw new AppError('Token é obrigatório para acessar este recurso.', 400);
+        if (! $token) {
+            throw new AppError('Token is required to access this feature', 400);
         }
 
-        try{
-            JWTAuth::parseToken()->authenticate();
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $request->merge([
+                'user_id' => $user->id,
+                'user_cpf' => $user->cpf,
+                'user_isAdmin' => $user->isAdmin,
+            ]);
+
             return $next($request);
-        } catch(JWTException $error ) {
 
-            if($error instanceof TokenInvalidException){
-                throw new AppError('Token Invalido', 498);
-            }
-
-            if($error instanceof TokenExpiredException){
-                throw new AppError('Token expirado', 401);
-            }
-
+        } catch (TokenInvalidException $error) {
+            throw new AppError('Invalid token', 498);
+        } catch (TokenExpiredException $error) {
+            throw new AppError('Expired token', 401);
+        } catch (\Exception $error) {
             throw new AppError($error->getMessage(), 500);
-
         }
     }
 }

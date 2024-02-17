@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,10 +23,9 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name',
         'email',
-        'password',
         'cpf',
-        'balance',
-        'type'
+        'password',
+        'isAdmin',
     ];
 
     /**
@@ -36,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password',
+        'isAdmin',
     ];
 
     /**
@@ -57,6 +57,7 @@ class User extends Authenticatable implements JWTSubject
         return [
             'user_id' => $this->id,
             'user_cpf' => $this->cpf,
+            'user_isAdmin' => $this->isAdmin,
         ];
     }
 }

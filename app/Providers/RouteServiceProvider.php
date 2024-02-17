@@ -32,8 +32,8 @@ class RouteServiceProvider extends ServiceProvider
             $dirs = scandir($path = base_path(('routes/api')));
             $dirsWithoutDot = array_diff($dirs, ['..', '.']);
 
-            foreach($dirsWithoutDot as $dir){
-                if(file_exists($file = "{$path}/{$dir}")){
+            foreach ($dirsWithoutDot as $dir) {
+                if (file_exists($file = "{$path}/{$dir}")) {
                     Route::middleware('api')
                         ->prefix(('api'))
                         ->group($file);
