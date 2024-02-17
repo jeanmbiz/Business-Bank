@@ -4,13 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTransactionRequest extends FormRequest
-{
+class CreateTransactionRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -21,8 +19,8 @@ class CreateTransactionRequest extends FormRequest
      */
     public function rules(): array {
         return [
-            'value'=> ['required','numeric', 'gte:0.01'],
-            'payer' => 'required',
+            'value'    => ['required', 'numeric', 'gte:0.01'],
+            'payer'    => 'required',
             'receiver' => 'required',
         ];
     }
@@ -30,8 +28,8 @@ class CreateTransactionRequest extends FormRequest
     public function messages(): array {
         return [
             'value.required' => 'O valor é obrigatório',
-            'value.numeric' => 'O valor deve ser um número',
-            'value.gte' => 'O valor deve ser maior ou igual a 0.01',
+            'value.numeric'  => 'O valor deve ser um número',
+            'value.gte'      => 'O valor deve ser maior ou igual a 0.01',
         ];
     }
 }

@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
-{
+class Transaction extends Model {
     use HasFactory, HasUuids;
 
     /**
@@ -17,13 +16,11 @@ class Transaction extends Model
      *
      * @var array<int, string>
      */
-
     protected $table = 'transactions';
-
 
     protected $fillable = [
         'value',
         'receiver_id',
-        'payer_id'
+        'payer_id',
     ];
 }

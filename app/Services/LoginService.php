@@ -16,9 +16,9 @@ class LoginService {
         $user = Auth::user();
 
         $token = JWTAuth::fromUser($user, [
-            'user_id'  => $user->id,
-            'user_cpf' => $user->cpf,
-            'user_isAdmin' => $user->isAdmin
+            'user_id'      => $user->id,
+            'user_cpf'     => $user->cpf,
+            'user_isAdmin' => $user->isAdmin,
         ]);
 
         return $this->respondWithToken($token, $user);

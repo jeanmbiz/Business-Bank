@@ -4,13 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
-{
+class LoginRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -19,18 +17,17 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            'email'=>'required',
-            'password'=>'required',
+            'email'    => 'required',
+            'password' => 'required',
         ];
     }
 
     public function messages(): array {
         return [
-            'email.required' => 'Email é obrigatóro',
-            'password.required' => 'Senha é obrigatóra'
+            'email.required'    => 'Email é obrigatóro',
+            'password.required' => 'Senha é obrigatóra',
         ];
     }
 }
