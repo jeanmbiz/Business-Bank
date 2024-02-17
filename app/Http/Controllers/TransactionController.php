@@ -21,13 +21,10 @@ class TransactionController extends Controller
         return $this->createDepositService->execute($request->all());
     }
 
-
     public function create(CreateTransactionRequest $request)
     {
         $createTransactionService = new CreateTransactionService();
 
         return $createTransactionService->execute($request->all());
     }
-
-
 }

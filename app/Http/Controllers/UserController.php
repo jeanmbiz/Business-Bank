@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateDepositRequest;
 use App\Http\Requests\CreateUserRequest;
-use App\Services\CreateDepositService;
 use App\Services\CreateUserService;
 
 class UserController extends Controller
