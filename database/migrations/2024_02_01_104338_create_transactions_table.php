@@ -16,9 +16,9 @@ return new class extends Migration
             $table->primary('id');
             $table->uuid('payer_id');
             $table->uuid('receiver_id');
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('transaction_type');
-            $table->string('name');
+            $table->string('payer_name');
             $table->decimal('value');
             $table->timestamps();
 

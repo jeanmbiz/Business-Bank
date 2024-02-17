@@ -24,7 +24,7 @@ class Transaction extends Model
         'receiver_id',
         'date',
         'transaction_type',
-        'name',
+        'payer_name',
         'value',
     ];
 }
