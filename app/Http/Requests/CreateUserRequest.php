@@ -24,7 +24,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'regex:/\S+@\S+\.\S+/'],
-            'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
+            'cpf' => ['required', 'string', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
             'password' => ['required', 'min:7', 'regex:/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/i'],
             'isAdmin' => ['boolean'],
             'balance' => ['prohibited'],
@@ -39,6 +39,7 @@ class CreateUserRequest extends FormRequest
             'email.required' => 'Email é obrigatóro',
             'email.regex' => 'Email deve ser um endereço válido',
             'cpf.required' => 'CPF é obrigatóro',
+            'cpf.string' => 'CPF deve ser do tipo string',
             'cpf.regex' => 'CPF deve ser válido',
             'password.required' => 'Senha é obrigatóra',
             'password.min' => 'Senha deve conter no mínimo 7 caracteres',
