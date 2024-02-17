@@ -4,5 +4,6 @@ namespace App\Exceptions;
 
 use Exception;
 
-class AppError extends Exception {
+class AppError extends Exception{
+    
 }

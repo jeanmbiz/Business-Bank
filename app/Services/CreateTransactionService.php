@@ -6,28 +6,30 @@ use App\Exceptions\AppError;
 use App\Models\Transaction;
 use App\Models\User;
 
-class CreateTransactionService {
+class CreateTransactionService{
+
     private function findUser(string $id) {
         $user = User::find($id);
 
-        if (is_null($user)) {
+        if(is_null($user)){
             return new AppError("Usuário {$id} não encontrado ", 404);
         }
 
         return $user;
     }
 
-    public function execute(array $data) {
+    public function execute(array $data){
+
 
         $userPayer = $this->findUser($data['payer']);
 
         $userReceiver = $this->findUser($data['receiver']);
 
-        if ($userPayer->type === 'SELLER') {
+        if($userPayer->type === 'SELLER'){
             throw new AppError('Tipo de usuário inválido', 403);
         }
 
-        if ($userPayer->balance < $data['value']) {
+        if($userPayer->balance < $data['value']){
             throw new AppError('Saldo insuficiente para transação', 400);
         }
 
@@ -38,9 +40,9 @@ class CreateTransactionService {
         $userReceiver->save();
 
         return Transaction::create([
-            'payer_id'    => $userPayer->id,
+            'payer_id' => $userPayer->id,
             'receiver_id' => $userReceiver->id,
-            'value'       => $data['value'],
+            'value' => $data['value']
         ]);
 
     }
