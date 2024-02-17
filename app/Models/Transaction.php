@@ -17,13 +17,11 @@ class Transaction extends Model
      *
      * @var array<int, string>
      */
-
     protected $table = 'transactions';
-
 
     protected $fillable = [
         'value',
         'receiver_id',
-        'payer_id'
+        'payer_id',
     ];
 }

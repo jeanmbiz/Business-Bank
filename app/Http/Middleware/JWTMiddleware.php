@@ -9,11 +9,13 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class JWTMiddleware {
-    public function handle(Request $request, Closure $next) {
+class JWTMiddleware
+{
+    public function handle(Request $request, Closure $next)
+    {
 
         $authorizationHeader = $request->header('Authorization');
-        $token               = str_replace('Bearer ', '', $authorizationHeader);
+        $token = str_replace('Bearer ', '', $authorizationHeader);
 
         if (! $token) {
             throw new AppError('Token is required to access this feature', 400);
@@ -23,8 +25,8 @@ class JWTMiddleware {
             $user = JWTAuth::parseToken()->authenticate();
 
             $request->merge([
-                'user_id'      => $user->id,
-                'user_cpf'     => $user->cpf,
+                'user_id' => $user->id,
+                'user_cpf' => $user->cpf,
                 'user_isAdmin' => $user->isAdmin,
             ]);
 

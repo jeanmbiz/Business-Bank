@@ -19,13 +19,15 @@ class CreateDepositRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function rules(): array
+    {
         return [
-            'value'=> ['required','numeric', 'gte:0.01'],
+            'value' => ['required', 'numeric', 'gte:0.01'],
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'value.required' => 'O valor é obrigatório',
             'value.numeric' => 'O valor deve ser um número',
