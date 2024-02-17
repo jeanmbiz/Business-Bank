@@ -23,8 +23,6 @@ class CreateTransactionRequest extends FormRequest
     {
         return [
             'value' => ['required', 'numeric', 'gte:0.01'],
-            'payer' => 'required',
-            'receiver' => 'required',
         ];
     }
 

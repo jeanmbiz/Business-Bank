@@ -20,8 +20,11 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     protected $fillable = [
-        'value',
-        'receiver_id',
         'payer_id',
+        'receiver_id',
+        'date',
+        'transaction_type',
+        'name',
+        'value',
     ];
 }
