@@ -22,9 +22,9 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'email' => ['required', 'email'],
-            'cpf' => ['required'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'regex:/\S+@\S+\.\S+/'],
+            'cpf' => ['required', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
             'password' => ['required', 'min:7', 'regex:/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/i'],
             'isAdmin' => ['boolean'],
             'balance' => ['prohibited'],
@@ -35,12 +35,14 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'name.required' => 'Nome é obrigatóro',
+            'name.string' => 'Nome deve ser do tipo string',
             'email.required' => 'Email é obrigatóro',
-            'email.mail' => 'Email deve ser um endereço válido',
+            'email.regex' => 'Email deve ser um endereço válido',
             'cpf.required' => 'CPF é obrigatóro',
+            'cpf.regex' => 'CPF deve ser válido',
             'password.required' => 'Senha é obrigatóra',
-            'password.min' => 'Senha deve conter mínimo 7 caracteres',
-            'password.regex' => 'Senha deve ter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
+            'password.min' => 'Senha deve conter no mínimo 7 caracteres',
+            'password.regex' => 'Senha deve conter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
             'isAdmin' => 'O valor deve ser do tipo booleano',
             'balance.prohibited' => 'Este campo não pode ser incluído na criação do usuário.',
         ];
