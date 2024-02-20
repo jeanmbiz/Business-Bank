@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDepositRequest;
-use App\Http\Requests\CreateTransactionRequest;
+use App\Http\Requests\CreateTransferenceRequest;
 use App\Services\CreateDepositService;
-use App\Services\CreateTransactionService;
+use App\Services\CreateTransferenceService;
 
 class TransactionController extends Controller
 {
     protected $createDepositService;
 
-    public function __construct(CreateDepositService $createDepositService)
+    protected $createTransferenceService;
+
+    public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService)
     {
         $this->createDepositService = $createDepositService;
+        $this->createTransferenceService = $createTransferenceService;
     }
 
     public function deposit(CreateDepositRequest $request)
@@ -21,10 +24,8 @@ class TransactionController extends Controller
         return $this->createDepositService->execute($request->all());
     }
 
-    public function create(CreateTransactionRequest $request)
+    public function transference(CreateTransferenceRequest $request)
     {
-        $createTransactionService = new CreateTransactionService();
-
-        return $createTransactionService->execute($request->all());
+        return $this->createTransferenceService->execute($request->all());
     }
 }
