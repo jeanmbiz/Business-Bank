@@ -2,32 +2,30 @@
 
 namespace App\Services;
 
-use App\Exceptions\AppError;
-use App\Models\Transaction;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Repositories\TransactionRepository;
+use App\Repositories\UserRepository;
 
 class CreateDepositService
 {
-    protected $userModel;
+    protected $userRepository;
 
-    protected $transactionModel;
+    protected $transactionRepository;
 
-    protected $carbon;
-
-    public function __construct(User $userModel, Transaction $transactionModel, Carbon $carbon)
+    public function __construct(UserRepository $userRepository, TransactionRepository $transactionRepository)
     {
-        $this->userModel = $userModel;
-        $this->transactionModel = $transactionModel;
-        $this->carbon = $carbon;
+        $this->userRepository = $userRepository;
+        $this->transactionRepository = $transactionRepository;
     }
 
     public function execute(array $data)
     {
-        $receiverUser = $this->getUserByCpf($data['receiverCpf']);
 
-        if (isset($data['payerCpf']) && $data['payerCpf']) {
-            $payerUser = $this->getUserByCpf($data['payerCpf']);
+        ['receiverCpf' => $receiverCpf, 'value' => $value, 'payerCpf' => $payerCpf] = $data;
+
+        $receiverUser = $this->userRepository->getUserByCpf($receiverCpf);
+
+        if (isset($payerCpf) && $payerCpf) {
+            $payerUser = $this->userRepository->getUserByCpf($payerCpf);
             $payerName = $payerUser->name;
             $payerId = $payerUser->id;
         } else {
@@ -35,36 +33,10 @@ class CreateDepositService
             $payerId = $receiverUser->id;
         }
 
-        $transaction = new $this->transactionModel;
-        $transaction->payer_id = $payerId;
-        $transaction->receiver_id = $receiverUser->id;
-        $transaction->date = Carbon::now()->toDateString();
-        $transaction->transaction_type = 'deposit';
-        $transaction->payer_name = $payerName;
-        $transaction->value = $data['value'];
+        $this->userRepository->updateBalanceByDeposit($receiverUser, $value);
 
-        $this->updateBalanceUser($receiverUser, $data['value']);
-
-        $transaction->save();
+        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverUser->id, 'deposit', $payerName, $value);
 
         return $transaction;
-    }
-
-    protected function getUserByCpf($cpf)
-    {
-        $user = $this->userModel->where('cpf', $cpf)->first();
-
-        if (is_null($user)) {
-            throw new AppError('Usuário não encontrado', 404);
-        }
-
-        return $user;
-    }
-
-    protected function updateBalanceUser($receiverUser, $value)
-    {
-        $receiverUser->balance += $value;
-
-        $receiverUser->save();
     }
 }
