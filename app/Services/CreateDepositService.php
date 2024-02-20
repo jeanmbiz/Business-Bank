@@ -20,12 +20,12 @@ class CreateDepositService
     public function execute(array $data)
     {
 
-        ['receiverCpf' => $receiverCpf, 'value' => $value, 'payerCpf' => $payerCpf] = $data;
+        ['receiverCpf' => $receiverCpf, 'value' => $value] = $data;
 
         $receiverUser = $this->userRepository->getUserByCpf($receiverCpf);
 
-        if (isset($payerCpf) && $payerCpf) {
-            $payerUser = $this->userRepository->getUserByCpf($payerCpf);
+        if (isset($data['payerCpf']) && $data['payerCpf']) {
+            $payerUser = $this->userRepository->getUserByCpf($data['payerCpf']);
             $payerName = $payerUser->name;
             $payerId = $payerUser->id;
         } else {
