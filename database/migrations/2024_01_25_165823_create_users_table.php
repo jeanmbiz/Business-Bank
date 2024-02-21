@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('isAdmin')->default(false);
             $table->decimal('balance')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
