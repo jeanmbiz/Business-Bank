@@ -19,7 +19,7 @@ class UserRepository
         $user = $this->userModel->where('cpf', $cpf)->first();
 
         if (is_null($user)) {
-            throw new AppError('Usuário não encontrado', 401);
+            throw new AppError('Usuário não existe', 404);
         }
 
         return $user;

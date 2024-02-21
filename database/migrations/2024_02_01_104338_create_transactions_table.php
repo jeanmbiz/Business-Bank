@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('payer_name');
             $table->decimal('value');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('payer_id')->references('id')->on('users');
             $table->foreign('receiver_id')->references('id')->on('users');
