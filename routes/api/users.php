@@ -8,4 +8,8 @@ Route::group([
 ], function () {
     Route::post('', [UserController::class, 'create']);
 
+    Route::middleware(['jwt.verify', 'isSameUser.verify'])->group(function () {
+        Route::delete('/{userId}', [UserController::class, 'delete']);
+    });
+
 });
