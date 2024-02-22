@@ -14,7 +14,7 @@ class IsSameUserMiddleware
         $user = Auth::user();
 
         if ($user->id !== $request->route('userId')) {
-            throw new AppError('Somente o próprio usuário pode acessar este recurso', 403);
+            throw new AppError('Você tem permissão para deletar somente seu próprio usuário', 403);
         }
 
         return $next($request);
