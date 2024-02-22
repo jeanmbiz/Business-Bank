@@ -14,7 +14,7 @@ class IsAdminMiddleware
         $user = Auth::user();
 
         if (! $user->isAdmin) {
-            throw new AppError('Você não tem permissão para acessar este recurso', 403);
+            throw new AppError('Somente administradores podem acessar este recurso', 403);
         }
 
         return $next($request);
