@@ -8,8 +8,14 @@ Route::group([
 ], function () {
     Route::post('', [UserController::class, 'create']);
 
+    Route::patch('/{userId}', [UserController::class, 'update']);
+
     Route::middleware(['jwt.verify', 'isSameUser.verify'])->group(function () {
         Route::delete('/{userId}', [UserController::class, 'delete']);
+    });
+
+    Route::middleware(['jwt.verify', 'isAdmin.verify'])->group(function () {
+        Route::delete('/{userId}/admin', [UserController::class, 'delete']);
     });
 
 });
