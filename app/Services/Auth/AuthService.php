@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Auth;
 
 use App\Exceptions\AppError;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class LoginService
+class AuthService
 {
     public function execute(array $credentials)
     {
