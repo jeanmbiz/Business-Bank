@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDepositRequest;
 use App\Http\Requests\CreateTransferenceRequest;
-use App\Services\CreateDepositService;
-use App\Services\CreateTransferenceService;
+use App\Services\Transaction\CreateDepositService;
+use App\Services\Transaction\CreateTransferenceService;
 
 class TransactionController extends Controller
 {
