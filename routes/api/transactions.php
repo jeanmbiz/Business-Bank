@@ -14,4 +14,9 @@ Route::group(['prefix' => 'transactions'], function () {
         Route::get('/{userId}', [TransactionController::class, 'listOwnBalance']);
     });
 
+    Route::middleware(['jwt.verify', 'isAdmin.verify'])->group(function () {
+        Route::delete('/deposit/{depositId}', [TransactionController::class, 'deleteDeposit']);
+    });
+
+
 });
