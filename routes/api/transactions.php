@@ -10,4 +10,8 @@ Route::group(['prefix' => 'transactions'], function () {
         Route::post('/transference', [TransactionController::class, 'transference']);
     });
 
+    Route::middleware(['jwt.verify', 'isSameUser.verify'])->group(function(){
+        Route::get('/{userId}', [TransactionController::class, 'listOwnBalance']);
+    });
+
 });
