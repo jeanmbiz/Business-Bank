@@ -19,12 +19,8 @@ class ListOwnBalanceService
 
     public function execute($request)
     {
-        $userId = $request->route('userId');
-
-        $user = $this->userRepository->getUserById($userId);
-
         $response = [
-            'balance' => $user->balance
+            'balance' => $request['user_DB']->balance
         ];
 
         return json_encode($response);
