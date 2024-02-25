@@ -23,7 +23,7 @@ class DeleteDepositService
         $deposit = $this->transactionRepository->findTransactionById($depositId);
         ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $deposit;
 
-        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "deposit refund regarding ${depositId}", $payer, -$value);
+        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "deposit refund ${depositId}", $payer, -$value);
 
         $receiverUser = $this->userRepository->getUserById($deposit['receiver_id']);
 
