@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\AppError;
 use App\Models\Transaction;
 use Carbon\Carbon;
 
@@ -25,6 +26,19 @@ class TransactionRepository
         $transaction->value = $value;
 
         $transaction->save();
+
+        return $transaction;
+    }
+
+    public function findTransactionById($transactionId){
+
+        $transaction = $this->transactionModel->where('id', $transactionId)->first();
+
+        // dd($transaction);
+
+        if (is_null($transaction)) {
+            throw new AppError('Transação não existe', 404);
+        }
 
         return $transaction;
     }
