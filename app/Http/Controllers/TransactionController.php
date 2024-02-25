@@ -7,6 +7,7 @@ use App\Http\Requests\CreateTransferenceRequest;
 use App\Services\Transaction\CreateDepositService;
 use App\Services\Transaction\CreateTransferenceService;
 use App\Services\Transaction\DeleteDepositService;
+use App\Services\Transaction\DeleteTransferenceService;
 use App\Services\Transaction\ListOwnBalanceService;
 use Illuminate\Http\Request;
 
@@ -16,13 +17,17 @@ class TransactionController extends Controller
     protected $listOwnBalanceService;
     protected $createTransferenceService;
     protected $deleteDepositService;
+    protected $deleteTransferenceService;
 
-    public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService, ListOwnBalanceService $listOwnBalanceService, DeleteDepositService $deleteDepositService)
+
+    public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService, ListOwnBalanceService $listOwnBalanceService, DeleteDepositService $deleteDepositService, DeleteTransferenceService $deleteTransferenceService)
     {
         $this->createDepositService = $createDepositService;
         $this->createTransferenceService = $createTransferenceService;
         $this->listOwnBalanceService = $listOwnBalanceService;
         $this->deleteDepositService = $deleteDepositService;
+        $this->deleteTransferenceService = $deleteTransferenceService;
+
     }
 
     public function deposit(CreateDepositRequest $request)
@@ -42,5 +47,9 @@ class TransactionController extends Controller
     public function deleteDeposit(Request $request)
     {
         return $this->deleteDepositService->execute($request);
+    }
+    public function deleteTransference(Request $request)
+    {
+        return $this->deleteTransferenceService->execute(($request));
     }
 }
