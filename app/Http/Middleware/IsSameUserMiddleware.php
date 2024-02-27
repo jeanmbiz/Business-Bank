@@ -16,7 +16,7 @@ class IsSameUserMiddleware
         $paramUser = User::find($userId);
 
         if (is_null($paramUser)) {
-            throw new AppError('Usuário não existe', 404);
+            throw new AppError('Usuário inexistente ou inativo do sistema', 404);
         }
 
         if ($request['user_id'] !== $userId) {
