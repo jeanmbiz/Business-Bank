@@ -4,14 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use App\Services\User\CreateUserService;
 use App\Services\User\DeleteUserService;
 use App\Services\User\listActiveUsersService;
 use App\Services\User\UpdateUserService;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
+    protected $updateUserService;
+
+    public function __construct(UpdateUserService $updateUserService)
+    {
+        $this->updateUserService = $updateUserService;
+
+    }
+
+
     public function create(CreateUserRequest $request)
     {
         $createUserService = new CreateUserService();
@@ -28,9 +39,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request){
 
-        $updateUserService = new UpdateUserService();
-
-        return $updateUserService->execute($request->all());
+        return $this->updateUserService->execute($request);
     }
 
     public function delete(Request $request)
