@@ -35,9 +35,8 @@ class CreateTransferenceService
             throw new AppError('Você não pode transferir dinheiro para sua própria conta.', 400);
         }
 
-        $this->userRepository->updateBalanceByTransference($payerUser, $receiverUser, $value);
-
         $transaction = $this->transactionRepository->createTransaction($payerUser->id, $receiverUser->id, 'transference', $payerUser->name, $value);
+        $this->userRepository->updateBalanceByTransference($payerUser, $receiverUser, $value);
 
         return response()->json($transaction);
 
