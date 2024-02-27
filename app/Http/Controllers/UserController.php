@@ -6,7 +6,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Services\User\CreateUserService;
 use App\Services\User\DeleteUserService;
-use App\Services\User\listActiveUsersService;
+use App\Services\User\listUsersService;
 use App\Services\User\UpdateUserService;
 use Illuminate\Http\Request;
 
@@ -27,10 +27,10 @@ class UserController extends Controller
         return $createUserService->execute($request->all());
     }
 
-    public function listActiveUsers()
+    public function listUsers()
     {
 
-        $listUsersService = new listActiveUsersService();
+        $listUsersService = new listUsersService();
 
         return $listUsersService->execute();
     }

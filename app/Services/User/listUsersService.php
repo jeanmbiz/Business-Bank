@@ -4,11 +4,11 @@ namespace App\Services\User;
 
 use App\Models\User;
 
-class listActiveUsersService
+class listUsersService
 {
     public function execute()
     {
-        $users = User::all();
+        $users = User::withTrashed()->paginate(10);
 
         return response()->json($users);
     }
