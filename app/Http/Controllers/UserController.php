@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $updateUserService;
+
+    public function __construct(UpdateUserService $updateUserService)
+    {
+        $this->updateUserService = $updateUserService;
+
+    }
+
     public function create(CreateUserRequest $request)
     {
         $createUserService = new CreateUserService();
@@ -19,18 +27,18 @@ class UserController extends Controller
         return $createUserService->execute($request->all());
     }
 
-    public function listActiveUsers(){
+    public function listActiveUsers()
+    {
 
         $listUsersService = new listActiveUsersService();
 
         return $listUsersService->execute();
     }
 
-    public function update(UpdateUserRequest $request){
+    public function update(UpdateUserRequest $request)
+    {
 
-        $updateUserService = new UpdateUserService();
-
-        return $updateUserService->execute($request->all());
+        return $this->updateUserService->execute($request);
     }
 
     public function delete(Request $request)

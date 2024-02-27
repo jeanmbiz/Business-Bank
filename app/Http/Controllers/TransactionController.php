@@ -14,11 +14,14 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     protected $createDepositService;
-    protected $listOwnBalanceService;
-    protected $createTransferenceService;
-    protected $deleteDepositService;
-    protected $deleteTransferenceService;
 
+    protected $listOwnBalanceService;
+
+    protected $createTransferenceService;
+
+    protected $deleteDepositService;
+
+    protected $deleteTransferenceService;
 
     public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService, ListOwnBalanceService $listOwnBalanceService, DeleteDepositService $deleteDepositService, DeleteTransferenceService $deleteTransferenceService)
     {
@@ -40,14 +43,17 @@ class TransactionController extends Controller
         return $this->createTransferenceService->execute($request->all());
     }
 
-    public function listOwnBalance(Request $request){
+    public function listOwnBalance(Request $request)
+    {
 
         return $this->listOwnBalanceService->execute($request);
     }
+
     public function deleteDeposit(Request $request)
     {
         return $this->deleteDepositService->execute($request);
     }
+
     public function deleteTransference(Request $request)
     {
         return $this->deleteTransferenceService->execute(($request));

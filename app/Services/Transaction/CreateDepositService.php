@@ -37,6 +37,6 @@ class CreateDepositService
 
         $transaction = $this->transactionRepository->createTransaction($payerId, $receiverUser->id, 'deposit', $payerName, $value);
 
-        return $transaction;
+        return response()->json($transaction);
     }
 }

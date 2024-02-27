@@ -10,6 +10,6 @@ class listActiveUsersService
     {
         $users = User::all();
 
-        return $users;
+        return response()->json($users);
     }
 }

@@ -20,10 +20,10 @@ class ListOwnBalanceService
     public function execute($request)
     {
         $response = [
-            'balance' => $request['user_DB']->balance
+            'balance' => $request['user_DB']->balance,
         ];
 
-        return json_encode($response);
+        return response()->json($response);
 
     }
 }
