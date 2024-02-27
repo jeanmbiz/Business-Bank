@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
 use App\Services\User\CreateUserService;
 use App\Services\User\DeleteUserService;
 use App\Services\User\listActiveUsersService;
 use App\Services\User\UpdateUserService;
 use Illuminate\Http\Request;
-
 
 class UserController extends Controller
 {
@@ -22,7 +20,6 @@ class UserController extends Controller
 
     }
 
-
     public function create(CreateUserRequest $request)
     {
         $createUserService = new CreateUserService();
@@ -30,14 +27,16 @@ class UserController extends Controller
         return $createUserService->execute($request->all());
     }
 
-    public function listActiveUsers(){
+    public function listActiveUsers()
+    {
 
         $listUsersService = new listActiveUsersService();
 
         return $listUsersService->execute();
     }
 
-    public function update(UpdateUserRequest $request){
+    public function update(UpdateUserRequest $request)
+    {
 
         return $this->updateUserService->execute($request);
     }

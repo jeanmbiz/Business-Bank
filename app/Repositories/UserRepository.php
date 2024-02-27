@@ -44,10 +44,7 @@ class UserRepository
             throw new AppError('Email já cadastrado', 404);
         }
 
-        return;
     }
-
-
 
     public function updateBalanceByDeposit($receiverUser, $value)
     {

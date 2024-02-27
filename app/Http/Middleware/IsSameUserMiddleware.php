@@ -6,7 +6,6 @@ use App\Exceptions\AppError;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class IsSameUserMiddleware
 {
@@ -25,7 +24,7 @@ class IsSameUserMiddleware
         }
 
         $request->merge([
-            'user_DB' => $paramUser
+            'user_DB' => $paramUser,
         ]);
 
         return $next($request);

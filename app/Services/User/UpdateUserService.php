@@ -18,20 +18,20 @@ class UpdateUserService
     {
         $updateData = new \stdClass;
 
-        if($request->has('name')){
-            $updateData->name = $request->input('name');;
+        if ($request->has('name')) {
+            $updateData->name = $request->input('name');
         }
 
-        if($request->has('email')){
+        if ($request->has('email')) {
             $this->userRepository->emailAlreadyExists($request['email']);
-            $updateData->email = $request->input('email');;
+            $updateData->email = $request->input('email');
         }
 
-        if($request->has('password')){
-            $updateData->password =  bcrypt($request->input('password'));
+        if ($request->has('password')) {
+            $updateData->password = bcrypt($request->input('password'));
         }
 
-        $request->input('user_DB')->update((array) $updateData) ;
+        $request->input('user_DB')->update((array) $updateData);
 
         return response()->json($request->input('user_DB'));
     }
