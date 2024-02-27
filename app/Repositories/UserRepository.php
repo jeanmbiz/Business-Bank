@@ -14,6 +14,17 @@ class UserRepository
         $this->userModel = $userModel;
     }
 
+    public function getUserById($id)
+    {
+        $user = $this->userModel->where('id', $id)->first();
+
+        if (is_null($user)) {
+            throw new AppError('Usuário não existe', 404);
+        }
+
+        return $user;
+    }
+
     public function getUserByCpf($cpf)
     {
         $user = $this->userModel->where('cpf', $cpf)->first();
@@ -24,6 +35,19 @@ class UserRepository
 
         return $user;
     }
+
+    public function emailAlreadyExists($email)
+    {
+        $user = $this->userModel->where('email', $email)->first();
+
+        if ($user) {
+            throw new AppError('Email já cadastrado', 404);
+        }
+
+        return;
+    }
+
+
 
     public function updateBalanceByDeposit($receiverUser, $value)
     {
