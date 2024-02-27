@@ -32,7 +32,7 @@ class DeleteTransferenceService
 
         $transference->delete();
 
-        return $transaction;
+        return response()->json($transaction);
 
     }
 }

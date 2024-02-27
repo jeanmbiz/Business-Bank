@@ -39,7 +39,7 @@ class CreateTransferenceService
 
         $transaction = $this->transactionRepository->createTransaction($payerUser->id, $receiverUser->id, 'transference', $payerUser->name, $value);
 
-        return $transaction;
+        return response()->json($transaction);
 
     }
 }

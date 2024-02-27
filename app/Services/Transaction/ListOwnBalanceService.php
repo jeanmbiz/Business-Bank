@@ -23,7 +23,7 @@ class ListOwnBalanceService
             'balance' => $request['user_DB']->balance
         ];
 
-        return json_encode($response);
+        return response()->json($response);
 
     }
 }

@@ -30,7 +30,7 @@ class DeleteDepositService
         $this->userRepository->updateBalanceByDeposit($receiverUser, -$value);
         $deposit->delete();
 
-        return $transaction;
+        return response()->json($transaction);
 
     }
 }

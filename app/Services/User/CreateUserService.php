@@ -22,6 +22,6 @@ class CreateUserService
             throw new AppError('CPF já cadastrado', 400);
         }
 
-        return User::create($data);
+        return response()->json(User::create($data));
     }
 }
