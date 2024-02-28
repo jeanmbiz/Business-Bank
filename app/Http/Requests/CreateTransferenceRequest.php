@@ -22,16 +22,22 @@ class CreateTransferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'receiverCpf' => ['required', 'string', 'regex:/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/'],
             'value' => ['required', 'numeric', 'gte:0.01'],
+            'payerCpf' => ['prohibited'],
         ];
     }
 
     public function messages(): array
     {
         return [
+            'receiverCpf.required' => 'receiverCpf é obrigatóro',
+            'receiverCpf.string' => 'CPF deve ser do tipo string',
+            'receiverCpf.regex' => 'CPF deve ser válido',
             'value.required' => 'O valor é obrigatório',
             'value.numeric' => 'O valor deve ser um número',
             'value.gte' => 'O valor deve ser maior ou igual a 0.01',
+            'payerCpf.prohibited' => 'Informar payerCpf não é necessário.',
         ];
     }
 }
