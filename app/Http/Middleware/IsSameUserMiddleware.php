@@ -16,11 +16,11 @@ class IsSameUserMiddleware
         $paramUser = User::find($userId);
 
         if (is_null($paramUser)) {
-            throw new AppError('Usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('ID de usuário inexistente ou inativo do sistema', 404);
         }
 
         if ($request['user_id'] !== $userId) {
-            throw new AppError('Este recurso está disponivel apenas para o próprio usuário', 403);
+            throw new AppError('Este recurso está disponivel apenas para o próprio usuário autenticado', 403);
         }
 
         $request->merge([

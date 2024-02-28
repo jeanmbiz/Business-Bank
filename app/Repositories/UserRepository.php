@@ -19,7 +19,7 @@ class UserRepository
         $user = $this->userModel->where('id', $id)->first();
 
         if (is_null($user)) {
-            throw new AppError('Usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('ID de usuário inexistente ou inativo do sistema', 404);
         }
 
         return $user;
@@ -30,7 +30,7 @@ class UserRepository
         $user = $this->userModel->where('cpf', $cpf)->first();
 
         if (is_null($user)) {
-            throw new AppError('Usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('ID de usuário inexistente ou inativo do sistema', 404);
         }
 
         return $user;
