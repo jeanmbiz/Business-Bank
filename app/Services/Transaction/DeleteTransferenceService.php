@@ -20,7 +20,7 @@ class DeleteTransferenceService
     public function execute($request)
     {
         $transferenceId = $request->route('transferenceId');
-        $transference = $this->transactionRepository->findTransactionById($transferenceId);
+        $transference = $this->transactionRepository->getTransactionById($transferenceId);
 
         $this->transactionRepository->verifyTransactionType($transference['transaction_type'], 'transference');
 

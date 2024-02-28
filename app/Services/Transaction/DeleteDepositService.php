@@ -20,7 +20,7 @@ class DeleteDepositService
     public function execute($request)
     {
         $depositId = $request->route('depositId');
-        $deposit = $this->transactionRepository->findTransactionById($depositId);
+        $deposit = $this->transactionRepository->getTransactionById($depositId);
 
         $this->transactionRepository->verifyTransactionType($deposit['transaction_type'], 'deposit');
 

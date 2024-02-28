@@ -30,7 +30,7 @@ class TransactionRepository
         return $transaction;
     }
 
-    public function findTransactionById($transactionId)
+    public function getTransactionById($transactionId)
     {
 
         $transaction = $this->transactionModel->where('id', $transactionId)->first();
