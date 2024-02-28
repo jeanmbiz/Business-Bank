@@ -22,6 +22,8 @@ class DeleteDepositService
         $depositId = $request->route('depositId');
         $deposit = $this->transactionRepository->findTransactionById($depositId);
 
+        $this->transactionRepository->verifyTransactionType($deposit['transaction_type'], 'deposit');
+
         ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $deposit;
 
         $receiverUser = $this->userRepository->getUserById($deposit['receiver_id']);

@@ -22,6 +22,8 @@ class DeleteTransferenceService
         $transferenceId = $request->route('transferenceId');
         $transference = $this->transactionRepository->findTransactionById($transferenceId);
 
+        $this->transactionRepository->verifyTransactionType($transference['transaction_type'], 'transference');
+
         ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $transference;
 
         $payerUser = $this->userRepository->getUserById($transference['payer_id']);
