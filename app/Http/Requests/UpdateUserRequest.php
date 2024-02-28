@@ -36,11 +36,11 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.string' => 'Nome deve ser do tipo string',
             'email.regex' => 'Email deve ser um endereço válido',
-            'cpf.prohibited' => 'O campo CPF não pode ser alterado.',
+            'cpf.prohibited' => 'O CPF não pode ser alterado.',
             'password.min' => 'Senha deve conter no mínimo 7 caracteres',
             'password.regex' => 'Senha deve conter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
-            'isAdmin.prohibited' => 'O campo isAdmin não pode ser alterado.',
-            'balance.prohibited' => 'O campo balance não pode ser alterado.',
+            'isAdmin.prohibited' => 'isAdmin não pode ser alterado.',
+            'balance.prohibited' => 'balance não pode ser alterado.',
         ];
     }
 }

@@ -31,7 +31,7 @@ class CreateDepositRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'receiverCpf.required' => 'CPF é obrigatóro',
+            'receiverCpf.required' => 'receiverCpf é obrigatóro',
             'receiverCpf.string' => 'CPF deve ser do tipo string',
             'receiverCpf.regex' => 'CPF deve ser válido',
             'value.required' => 'O valor é obrigatório',

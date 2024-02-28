@@ -34,7 +34,7 @@ class CreateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Nome é obrigatóro',
+            'name.required' => 'Name é obrigatóro',
             'name.string' => 'Nome deve ser do tipo string',
             'email.required' => 'Email é obrigatóro',
             'email.regex' => 'Email deve ser um endereço válido',
@@ -44,7 +44,7 @@ class CreateUserRequest extends FormRequest
             'password.required' => 'Senha é obrigatóra',
             'password.min' => 'Senha deve conter no mínimo 7 caracteres',
             'password.regex' => 'Senha deve conter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
-            'isAdmin' => 'O valor deve ser do tipo booleano',
+            'isAdmin' => 'isAdmin deve ser do tipo booleano',
             'balance.prohibited' => 'Este campo não pode ser incluído na criação do usuário.',
         ];
     }
