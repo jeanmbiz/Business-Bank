@@ -20,13 +20,15 @@ class DeleteDepositService
     public function execute($request)
     {
         $depositId = $request->route('depositId');
-        $deposit = $this->transactionRepository->findTransactionById($depositId);
-        ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $deposit;
+        $deposit = $this->transactionRepository->getTransactionById($depositId);
 
-        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "deposit refund ${depositId}", $payer, -$value);
+        $this->transactionRepository->verifyTransactionType($deposit['transaction_type'], 'deposit');
+
+        ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $deposit;
 
         $receiverUser = $this->userRepository->getUserById($deposit['receiver_id']);
 
+        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "deposit refund ${depositId}", $payer, -$value);
         $this->userRepository->updateBalanceByDeposit($receiverUser, -$value);
         $deposit->delete();
 

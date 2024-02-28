@@ -11,20 +11,20 @@ class IsSameUserMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        $userId = $request->route('userId');
+        $paramId = $request->route('userId');
 
-        $paramUser = User::find($userId);
+        $paramUser = User::find($paramId);
 
         if (is_null($paramUser)) {
-            throw new AppError('Usuário não existe', 404);
+            throw new AppError('ID de usuário inexistente ou inativo do sistema', 404);
         }
 
-        if ($request['user_id'] !== $userId) {
-            throw new AppError('Este recurso está disponivel apenas para o próprio usuário', 403);
+        if ($request['user_id'] !== $paramId) {
+            throw new AppError('Este recurso está disponivel apenas para o próprio usuário autenticado', 403);
         }
 
         $request->merge([
-            'user_DB' => $paramUser,
+            'param_User_DB' => $paramUser,
         ]);
 
         return $next($request);

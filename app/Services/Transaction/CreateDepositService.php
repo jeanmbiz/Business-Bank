@@ -33,9 +33,8 @@ class CreateDepositService
             $payerId = $receiverUser->id;
         }
 
-        $this->userRepository->updateBalanceByDeposit($receiverUser, $value);
-
         $transaction = $this->transactionRepository->createTransaction($payerId, $receiverUser->id, 'deposit', $payerName, $value);
+        $this->userRepository->updateBalanceByDeposit($receiverUser, $value);
 
         return response()->json($transaction);
     }

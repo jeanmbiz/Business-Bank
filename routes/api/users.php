@@ -14,7 +14,7 @@ Route::group([
     });
 
     Route::middleware(['jwt.verify', 'isAdmin.verify'])->group(function () {
-        Route::get('', [UserController::class, 'listActiveUsers']);
+        Route::get('', [UserController::class, 'listUsers']);
         Route::delete('/{userId}/admin', [UserController::class, 'delete']);
     });
 

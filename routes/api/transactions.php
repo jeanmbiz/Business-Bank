@@ -11,7 +11,8 @@ Route::group(['prefix' => 'transactions'], function () {
     });
 
     Route::middleware(['jwt.verify', 'isSameUser.verify'])->group(function () {
-        Route::get('/{userId}', [TransactionController::class, 'listOwnBalance']);
+        Route::get('/{userId}', [TransactionController::class, 'listOwnTransactions']);
+        Route::get('/balance/{userId}', [TransactionController::class, 'listOwnBalance']);
     });
 
     Route::middleware(['jwt.verify', 'isAdmin.verify'])->group(function () {

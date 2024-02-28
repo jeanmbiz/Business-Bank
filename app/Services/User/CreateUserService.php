@@ -2,25 +2,25 @@
 
 namespace App\Services\User;
 
-use App\Exceptions\AppError;
 use App\Models\User;
+use App\Repositories\UserRepository;
 
 class CreateUserService
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function execute(array $data)
     {
+        ['email' => $email, 'cpf' => $cpf] = $data;
 
-        $userFound = User::firstWhere('email', $data['email']);
+        $this->userRepository->verifyEmail($email);
 
-        if (! is_null($userFound)) {
-            throw new AppError('Email já cadastrado', 400);
-        }
-
-        $userFound = User::firstWhere('cpf', $data['cpf']);
-
-        if (! is_null($userFound)) {
-            throw new AppError('CPF já cadastrado', 400);
-        }
+        $this->userRepository->verifyCpf($cpf);
 
         return response()->json(User::create($data));
     }

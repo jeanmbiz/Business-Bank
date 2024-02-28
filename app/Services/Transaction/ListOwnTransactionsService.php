@@ -2,10 +2,11 @@
 
 namespace App\Services\Transaction;
 
+use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use App\Repositories\UserRepository;
 
-class ListOwnBalanceService
+class ListOwnTransactionsService
 {
     protected $userRepository;
 
@@ -19,11 +20,16 @@ class ListOwnBalanceService
 
     public function execute($request)
     {
-        $response = [
-            'balance' => $request['param_User_DB']->balance,
-        ];
+        $userId = $request['user_id'];
 
-        return response()->json($response);
+        $transactions = Transaction::where('payer_id', $userId)
+            ->orWhere('receiver_id', $userId)
+            ->orderBy('date', 'asc')
+            ->withTrashed()
+            ->select('id', 'date', 'payer_name', 'transaction_type', 'value')
+            ->paginate(10);
+
+        return response()->json($transactions);
 
     }
 }

@@ -20,16 +20,17 @@ class DeleteTransferenceService
     public function execute($request)
     {
         $transferenceId = $request->route('transferenceId');
-        $transference = $this->transactionRepository->findTransactionById($transferenceId);
-        ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $transference;
+        $transference = $this->transactionRepository->getTransactionById($transferenceId);
 
-        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "transference refund ${transferenceId}", $payer, -$value);
+        $this->transactionRepository->verifyTransactionType($transference['transaction_type'], 'transference');
+
+        ['payer_id' => $payerId, 'receiver_id' => $receiverId, 'payer_name' => $payer, 'value' => $value] = $transference;
 
         $payerUser = $this->userRepository->getUserById($transference['payer_id']);
         $receiverUser = $this->userRepository->getUserById($transference['receiver_id']);
 
+        $transaction = $this->transactionRepository->createTransaction($payerId, $receiverId, "transference refund ${transferenceId}", $payer, -$value);
         $this->userRepository->updateBalanceByTransference($payerUser, $receiverUser, -$value);
-
         $transference->delete();
 
         return response()->json($transaction);

@@ -23,7 +23,7 @@ class UpdateUserService
         }
 
         if ($request->has('email')) {
-            $this->userRepository->emailAlreadyExists($request['email']);
+            $this->userRepository->verifyEmail($request['email']);
             $updateData->email = $request->input('email');
         }
 
@@ -31,8 +31,8 @@ class UpdateUserService
             $updateData->password = bcrypt($request->input('password'));
         }
 
-        $request->input('user_DB')->update((array) $updateData);
+        $request->input('param_User_DB')->update((array) $updateData);
 
-        return response()->json($request->input('user_DB'));
+        return response()->json($request->input('param_User_DB'));
     }
 }

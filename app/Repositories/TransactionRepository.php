@@ -30,17 +30,24 @@ class TransactionRepository
         return $transaction;
     }
 
-    public function findTransactionById($transactionId)
+    public function getTransactionById($transactionId)
     {
 
         $transaction = $this->transactionModel->where('id', $transactionId)->first();
 
-        // dd($transaction);
-
         if (is_null($transaction)) {
-            throw new AppError('Transação não existe', 404);
+            throw new AppError('O ID da transação não existe', 404);
         }
 
         return $transaction;
+    }
+
+    public function verifyTransactionType($transactionType, $stringType)
+    {
+
+        if (strpos($transactionType, $stringType) === false) {
+            throw new AppError('O Tipo da transação está divergente com a exclusão', 400);
+        }
+
     }
 }

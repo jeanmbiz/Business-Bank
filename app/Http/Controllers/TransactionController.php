@@ -9,11 +9,14 @@ use App\Services\Transaction\CreateTransferenceService;
 use App\Services\Transaction\DeleteDepositService;
 use App\Services\Transaction\DeleteTransferenceService;
 use App\Services\Transaction\ListOwnBalanceService;
+use App\Services\Transaction\ListOwnTransactionsService;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
     protected $createDepositService;
+
+    protected $listOwnTransactionsService;
 
     protected $listOwnBalanceService;
 
@@ -23,10 +26,13 @@ class TransactionController extends Controller
 
     protected $deleteTransferenceService;
 
-    public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService, ListOwnBalanceService $listOwnBalanceService, DeleteDepositService $deleteDepositService, DeleteTransferenceService $deleteTransferenceService)
+    public function __construct(CreateDepositService $createDepositService, CreateTransferenceService $createTransferenceService,
+        ListOwnTransactionsService $listOwnTransactionsService, ListOwnBalanceService $listOwnBalanceService, DeleteDepositService $deleteDepositService,
+        DeleteTransferenceService $deleteTransferenceService)
     {
         $this->createDepositService = $createDepositService;
         $this->createTransferenceService = $createTransferenceService;
+        $this->listOwnTransactionsService = $listOwnTransactionsService;
         $this->listOwnBalanceService = $listOwnBalanceService;
         $this->deleteDepositService = $deleteDepositService;
         $this->deleteTransferenceService = $deleteTransferenceService;
@@ -41,6 +47,12 @@ class TransactionController extends Controller
     public function transference(CreateTransferenceRequest $request)
     {
         return $this->createTransferenceService->execute($request->all());
+    }
+
+    public function listOwnTransactions(Request $request)
+    {
+
+        return $this->listOwnTransactionsService->execute($request);
     }
 
     public function listOwnBalance(Request $request)

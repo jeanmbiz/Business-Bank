@@ -8,7 +8,7 @@ class DeleteUserService
 {
     public function delete(Request $request)
     {
-        $request['user_DB']->delete();
+        $request['param_User_DB']->delete();
 
         return response()->noContent();
     }
