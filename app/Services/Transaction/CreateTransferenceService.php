@@ -26,13 +26,13 @@ class CreateTransferenceService
         $payerUser = Auth::user();
 
         if ($value > $payerUser->balance) {
-            throw new AppError('Saldo insuficiente para transferência.', 400);
+            throw new AppError('Insufficient balance for transfer', 400);
         }
 
         $receiverUser = $this->userRepository->getUserByCpf($receiverCpf);
 
         if ($payerUser->id == $receiverUser->id) {
-            throw new AppError('Você não pode transferir dinheiro para sua própria conta.', 400);
+            throw new AppError('You cannot transfer money to your own account', 400);
         }
 
         $transaction = $this->transactionRepository->createTransaction($payerUser->id, $receiverUser->id, 'transference', $payerUser->name, $value);

@@ -30,8 +30,8 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Email é obrigatóro',
-            'password.required' => 'Senha é obrigatóra',
+            'email.required' => 'Email is mandatory',
+            'password.required' => 'Password is mandatory',
         ];
     }
 }

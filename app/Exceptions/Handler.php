@@ -48,18 +48,18 @@ class Handler extends ExceptionHandler
 
         if ($error instanceof AuthorizationException) {
             return response()->json([
-                'errors' => 'Usuario não autorizado',
+                'errors' => 'Unauthorized user',
             ], 403);
         }
 
         if ($error instanceof NotFoundHttpException) {
             return response()->json([
-                'errors' => 'Rota não encontrada',
+                'errors' => 'Route not found',
             ], 404);
         }
 
         return response()->json([
-            'message' => 'Ocorreu um erro interno no servidor',
+            'message' => 'An internal server error occurred',
         ], 500);
     }
 }
