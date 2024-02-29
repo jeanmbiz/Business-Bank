@@ -38,7 +38,7 @@ class UserRepository
 
     public function verifyEmail($email)
     {
-        $user = $this->userModel->where('email', $email)->first();
+        $user = $this->userModel->withTrashed()->where('email', $email)->first();
 
         if ($user) {
             throw new AppError('Email já cadastrado', 404);
@@ -48,7 +48,7 @@ class UserRepository
 
     public function verifyCpf($cpf)
     {
-        $user = $this->userModel->where('cpf', $cpf)->first();
+        $user = $this->userModel->withTrashed()->where('cpf', $cpf)->first();
 
         if ($user) {
             throw new AppError('CPF já cadastrado', 404);
