@@ -34,18 +34,18 @@ class CreateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Name é obrigatóro',
-            'name.string' => 'Nome deve ser do tipo string',
-            'email.required' => 'Email é obrigatóro',
-            'email.regex' => 'Email deve ser um endereço válido',
-            'cpf.required' => 'CPF é obrigatóro',
-            'cpf.string' => 'CPF deve ser do tipo string',
-            'cpf.regex' => 'CPF deve ser válido',
-            'password.required' => 'Senha é obrigatóra',
-            'password.min' => 'Senha deve conter no mínimo 7 caracteres',
-            'password.regex' => 'Senha deve conter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
-            'isAdmin' => 'isAdmin deve ser do tipo booleano',
-            'balance.prohibited' => 'Este campo não pode ser incluído na criação do usuário.',
+            'name.required' => 'Name is mandatory',
+            'name.string' => 'Name must be of type string',
+            'email.required' => 'Email is mandatory',
+            'email.regex' => 'Email must be a valid address',
+            'cpf.required' => 'CPF is mandatory',
+            'cpf.string' => 'CPF must be of type string',
+            'cpf.regex' => 'CPF must be valid',
+            'password.required' => 'Password is mandatory',
+            'password.min' => 'Password must contain at least 7 characters',
+            'password.regex' => 'Password must contain 1 uppercase letter, 1 lowercase letter and 1 number or special character',
+            'isAdmin' => 'isAdmin must be of boolean type',
+            'balance.prohibited' => 'This field cannot be included in user creation',
         ];
     }
 }

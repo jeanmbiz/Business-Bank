@@ -31,14 +31,14 @@ class CreateDepositRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'receiverCpf.required' => 'receiverCpf é obrigatóro',
-            'receiverCpf.string' => 'CPF deve ser do tipo string',
-            'receiverCpf.regex' => 'CPF deve ser válido',
-            'value.required' => 'O valor é obrigatório',
-            'value.numeric' => 'O valor deve ser um número',
-            'value.gte' => 'O valor deve ser maior ou igual a 0.01',
-            'payerCpf.string' => 'CPF deve ser do tipo string',
-            'payerCpf.regex' => 'CPF deve ser válido',
+            'receiverCpf.required' => 'receiverCpf is mandatory',
+            'receiverCpf.string' => 'CPF must be of type string',
+            'receiverCpf.regex' => 'CPF must be valid',
+            'value.required' => 'The value is mandatory',
+            'value.numeric' => 'The value must be a number',
+            'value.gte' => 'The value must be greater than or equal to 0.01',
+            'payerCpf.string' => 'CPF must be of type string',
+            'payerCpf.regex' => 'CPF must be valid',
         ];
     }
 }

@@ -34,13 +34,13 @@ class UpdateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.string' => 'Nome deve ser do tipo string',
-            'email.regex' => 'Email deve ser um endereço válido',
-            'cpf.prohibited' => 'O CPF não pode ser alterado.',
-            'password.min' => 'Senha deve conter no mínimo 7 caracteres',
-            'password.regex' => 'Senha deve conter obrigatóriamente 1 letra maiúscula, 1 letra minúscula e 1 número ou caracter especial.',
-            'isAdmin.prohibited' => 'isAdmin não pode ser alterado.',
-            'balance.prohibited' => 'balance não pode ser alterado.',
+            'name.string' => 'Name must be of type string',
+            'email.regex' => 'Email must be a valid address',
+            'cpf.prohibited' => 'CPF cannot be changed',
+            'password.min' => 'Password must contain at least 7 characters',
+            'password.regex' => 'Password must contain 1 uppercase letter, 1 lowercase letter and 1 number or special character',
+            'isAdmin.prohibited' => 'isAdmin cannot be changed',
+            'balance.prohibited' => 'balance cannot be changed',
         ];
     }
 }
