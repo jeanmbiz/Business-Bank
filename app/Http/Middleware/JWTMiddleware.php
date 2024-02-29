@@ -18,7 +18,7 @@ class JWTMiddleware
         $token = str_replace('Bearer ', '', $authorizationHeader);
 
         if (! $token) {
-            throw new AppError('Token is required to access this feature', 400);
+            throw new AppError('Token is required to access this feature', 401);
         }
 
         try {
@@ -33,9 +33,9 @@ class JWTMiddleware
             return $next($request);
 
         } catch (TokenInvalidException $error) {
-            throw new AppError('Invalid token', 498);
+            throw new AppError('Invalid token', 401);
         } catch (TokenExpiredException $error) {
-            throw new AppError('Expired token', 401);
+            throw new AppError('Expired token', 498);
         } catch (\Exception $error) {
             throw new AppError($error->getMessage(), 500);
         }

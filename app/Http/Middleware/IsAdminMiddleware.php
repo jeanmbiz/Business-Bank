@@ -15,11 +15,11 @@ class IsAdminMiddleware
         $paramUser = User::find($paramId);
 
         if (is_null($paramUser)) {
-            throw new AppError('ID de usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('User ID does not exist or is not active on the system', 404);
         }
 
         if (! $request['user_isAdmin']) {
-            throw new AppError('Somente administradores podem acessar este recurso', 403);
+            throw new AppError('Only administrators can access this feature', 403);
         }
 
         $request->merge([

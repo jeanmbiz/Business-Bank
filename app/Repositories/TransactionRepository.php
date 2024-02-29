@@ -36,7 +36,7 @@ class TransactionRepository
         $transaction = $this->transactionModel->where('id', $transactionId)->first();
 
         if (is_null($transaction)) {
-            throw new AppError('O ID da transação não existe', 404);
+            throw new AppError('Transaction ID does not exist', 404);
         }
 
         return $transaction;
@@ -46,7 +46,7 @@ class TransactionRepository
     {
 
         if (strpos($transactionType, $stringType) === false) {
-            throw new AppError('O Tipo da transação está divergente com a exclusão', 400);
+            throw new AppError('The transaction type is different from the deletion', 400);
         }
 
     }

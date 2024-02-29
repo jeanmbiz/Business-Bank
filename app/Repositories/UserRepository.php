@@ -19,7 +19,7 @@ class UserRepository
         $user = $this->userModel->where('id', $id)->first();
 
         if (is_null($user)) {
-            throw new AppError('ID do usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('User ID does not exist or is not active on the system', 404);
         }
 
         return $user;
@@ -30,7 +30,7 @@ class UserRepository
         $user = $this->userModel->where('cpf', $cpf)->first();
 
         if (is_null($user)) {
-            throw new AppError('CPF do usuário inexistente ou inativo do sistema', 404);
+            throw new AppError('User CPF does not exist or is not active on the system', 404);
         }
 
         return $user;
@@ -41,7 +41,7 @@ class UserRepository
         $user = $this->userModel->withTrashed()->where('email', $email)->first();
 
         if ($user) {
-            throw new AppError('Email já cadastrado', 404);
+            throw new AppError('E-mail already registered', 400);
         }
 
     }
@@ -51,7 +51,7 @@ class UserRepository
         $user = $this->userModel->withTrashed()->where('cpf', $cpf)->first();
 
         if ($user) {
-            throw new AppError('CPF já cadastrado', 404);
+            throw new AppError('CPF already registered', 400);
         }
 
     }
