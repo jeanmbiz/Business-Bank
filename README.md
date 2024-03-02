@@ -1,66 +1,77 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Business Bank
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+#### Trata-se de um Back-end que simula uma instituição financeira, com diversas regras de negócio, podendo criar contas de usuário e admin, fazer depósito, transferência de valores, entre outras funcionalidades.
 
-## About Laravel
+#### Deploy está diponível no render até dia 02/04/2024, baixe o arquivo insomnia para utilizar as rotas:
+[Arquivo Insomnia](/public/files/Insomnia_2024-03-02.json)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Diagrama do Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![diagrama](/public/files/diagram.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Regras de Negócio:
 
-## Learning Laravel
+#### Usuários
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   É possível criar usuários comuns e administradores, com validações de informações;
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Login
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Ao realizar o login é validado se credenciais estão corretas e se usuário está ativo na plataforma;
 
-## Laravel Sponsors
+#### Usuários Comuns
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   Fazer depósito por "receiverCpf" (não precisa estar autenticado);
+-   Fazer transferência (autenticação obrigatória);
+-   Verificar saldo, onde apenas o próprio usuário autenticado tem acesso;
+-   Extrato de transações, onde apenas o próprio usuário autenticado tem acesso;
+-   Editar dados do próprio usuário, onde apenas o próprio usuário autenticado tem acesso;
+-   Deletar o próprio usuário;
 
-### Premium Partners
+#### Usuários Admin
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   Listar todos os usuários da plataforma, com acesso a todos os dados;
+-   Excluir qualquer usuário da plataforma;
+-   Estornar/Excluir depósito;
+-   Estornar/Excluir Transferência;
 
-## Contributing
+## Instalação
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Para executar o projeto localmente, siga as etapas abaixo:
 
-## Code of Conduct
+#### 1.1 Clone o repositório:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+git clone git@github.com:jeanmbiz/Business-Bank.git
+```
 
-## Security Vulnerabilities
+#### 1.2 Acesse o diretório do projeto:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### 1.3 Execute o Docker Compose para construir e iniciar os contêineres:
 
-## License
+```
+docker-compose up -d
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### 1.4 Acesse o shell do container, para instalar as dependências do Laravel:
+
+```
+composer install
+```
+
+#### 1.5 Configure o banco de dados criando arquivo .env com base no arquivo .env.example:
+
+#### 1.6 Executar as migrações do Laravel no Shell:
+
+```
+php artisan migrate
+```
+
+## Bibliotecas e Frameworks utilizados
+
+-   Laravel Framework 10.10
+-   Tymon JWT Auth
+-   Laravel Sail
+-   Spatie Laravel Ignition
+-   Laravel Sanctum
+-   Docker Compose
