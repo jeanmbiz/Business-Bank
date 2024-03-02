@@ -20,7 +20,7 @@ class IsSameUserMiddleware
         }
 
         if ($request['user_id'] !== $paramId) {
-            throw new AppError('This feature is only available to the authenticated user', 403);
+            throw new AppError('This feature is only available to the own authenticated user', 403);
         }
 
         $request->merge([
