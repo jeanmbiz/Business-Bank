@@ -19,21 +19,23 @@
 
 -   Ao realizar o login é validado se credenciais estão corretas e se usuário está ativo na plataforma;
 
-#### Usuários Comuns
-
--   Fazer depósito por "receiverCpf" (não precisa estar autenticado);
--   Fazer transferência (autenticação obrigatória);
--   Verificar saldo, onde apenas o próprio usuário autenticado tem acesso;
--   Extrato de transações, onde apenas o próprio usuário autenticado tem acesso;
--   Editar dados do próprio usuário, onde apenas o próprio usuário autenticado tem acesso;
--   Deletar o próprio usuário;
-
-#### Usuários Admin
+#### Rotas Usuários Administradores
 
 -   Listar todos os usuários da plataforma, com acesso a todos os dados;
 -   Excluir qualquer usuário da plataforma;
 -   Estornar/Excluir depósito;
 -   Estornar/Excluir Transferência;
+
+#### Rotas Usuários Logados
+
+-   Fazer transferência
+-   Verificar seu saldo;
+-   Extrato de todas as suas transações;
+-   Editar dados do próprio usuário;
+-   Deletar o próprio usuário;
+
+#### Rotas Usuários Anônimos (Não autenticados)
+-   Fazer depósito para qualquér usuário da plataforma através do cpf;
 
 ## Instalação
 
